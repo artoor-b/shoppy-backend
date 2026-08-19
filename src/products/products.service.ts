@@ -9,6 +9,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { join } from 'path';
 import { cwd } from 'process';
 import { PRODUCT_IMAGES } from './product-images';
+import { Prisma } from 'generated/prisma/browser';
 
 @Injectable()
 export class ProductsService {
@@ -45,6 +46,13 @@ export class ProductsService {
     } catch (error) {
       throw new NotFoundException(`Porudct not found with ID ${productId}`);
     }
+  }
+
+  async update(productId: number, data: Prisma.ProductUpdateInput) {
+    await this.prismaService.product.update({
+      where: { id: productId },
+      data,
+    });
   }
 
   private async imageExists(productId: number) {
