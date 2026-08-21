@@ -1,13 +1,11 @@
 version: 0.2
 phases:
   install:
-    runtime-versions:
-      nodejs: 22
+    runtime-version:
+      nodejs: 20
     commands:
-      - curl -fsSL https://rpm.nodesource.com/setup_22.x | bash -
-      - yum install -y nodejs
       - node -v
-      - npm ci
+      - npm install
   build:
     commands:
       - npm prisma generate
